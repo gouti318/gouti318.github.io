@@ -2,7 +2,7 @@
 
 ## Instructions for use ##
 
-1. unzip the zip file and then extract it to a folder.
+1. Clone the repository onto your local machine and unzip the contents into a folder.
 2. The 'dist' is the folder containing the main minified source code used for rendering the website.
 3. The 'src' is the folder containing the distribution code which is in user readable state and not minified.
 4. Run index.html inside the 'dist' folder in any Web Browser to render the webpage.
