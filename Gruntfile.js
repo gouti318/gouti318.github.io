@@ -75,12 +75,12 @@ module.exports = function(grunt) {
           expand: true,
           src: ['*.{gif,jpg,png,jpeg}'],
           cwd: 'img/',
-          dest: 'images_fix/'
+          dest: 'img_fix/'
         }, {
           expand: true,
           src: ['*.{gif,jpg,png,jpeg}'],
           cwd: 'views/images',
-          dest: 'views/images_fix/'
+          dest: 'views/img_fix/'
       }]
     }
     },
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
     /* Clear out the images directory if it exists */
     clean: {
       dev: {
-        src: ['images_fix','views/images_fix','css-min','views/css-min','js-min','views/js-min'],
+        src: ['img_fix','views/img_fix','css-min','views/css-min','js-min','views/js-min'],
       },
     },
 
@@ -97,7 +97,7 @@ module.exports = function(grunt) {
     mkdir: {
       dev: {
         options: {
-          create: ['images_fix','views/images_fix','css-min','views/css-min','js-min','views/js-min']
+          create: ['img_fix','views/img_fix','css-min','views/css-min','js-min','views/js-min']
         },
       }
     },
@@ -108,11 +108,11 @@ module.exports = function(grunt) {
         files: [{
           expand: true,
           src: 'img/fixed/*.{gif,jpg,png}',
-          dest: 'images_fix/'
+          dest: 'img_fix/'
         },{
           expand: true,
           src: 'views/images/fixed/*.{gif,jpg,png}',
-          dest: 'images_fix/'
+          dest: 'img_fix/'
         }]
       },
     },
