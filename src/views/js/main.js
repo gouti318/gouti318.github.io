@@ -459,8 +459,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
+var pizzasDiv = document.getElementById("randomPizzas");
+for (var i = 2; i < 50; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -513,6 +513,7 @@ function updatePositions() {
   for(var i = 0; i < 5; i++) {
     phase[i] = 100 * Math.sin(scroll + i);
   }
+  //Use style.transform instead of style.left as it is rendered more faster.
   for (var i = 0; i < items.length; i++) {
     items[i].style.transform = 'translateX('+ phase[i % 5] + 'px)';
   }

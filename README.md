@@ -1,55 +1,45 @@
-## Website Performance Optimization portfolio project
+# Website Performance Optimization portfolio project #
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+## Instructions for use ##
 
-To get started, check out the repository and inspect the code.
+1. unzip the zip file and then extract it to a folder.
+2. The 'dist' is the folder containing the main minified source code used for rendering the website.
+3. The 'src' is the folder containing the distribution code which is in user readable state and not minified.
+4. Run index.html inside the 'dist' folder in any Web Browser to render the webpage.
 
-### Getting started
+## Steps to configure grunt ##
 
-####Part 1: Optimize PageSpeed Insights score for index.html
+1. Install npm using node.js or any other similar means.
+2. Install grunt either globally or specific to the project folder using npm install --save-dev grunt.
+3. Go to the root folder containing the webpage and initialise the folder using npm init.
+4. Using 'npm install' install all the necessary dependencies that are required. eg. grunt-contrib-cssmin etc.
+5. Create a Gruntfile.js which will contain all the necessary steps the grunt should do automatically once run.
+6. Now run grunt in the command prompt from the same directory to do the grunt functions.
 
-Some useful tips to help you get started:
+## Optimisations done on index.html ##
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+* Inlined all the CSS assosciated with index.html (style.css)
+* Resized and compressed the pizzeria and the profilepic image using grunt-responsive-images.
+* Minified css and js that are not inlined using grunt-contrib-cssmin and grunt-contrib-uglify.
+* Added async properties to the javascript to make it non render blocking.
+* Added media="print" for the print.css file to make it non render blocking.
+* Used webfont loader to load the googlefont and shifted it to the end of the HTML.
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+## Optimisations done on pizza.html ##
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
+* Minified the css assosciated with the page using grunt-contrib-cssmin(style.css,bootstrap-grid.css).
+* Minified the JavaScript assosciated with the webpage using grunt-contrib-uglify(main.js).
+* Compressed and resized the pizzeria and pizza image using grunt-responsive-images.
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ./ngrok http 8080
-  ```
+## Optimizations done on main.js ##
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
+* Changed the changeSliderLabel function by taking out the DOM accesing element out of the switch and initialised it to a variable pizzaSize.
 
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
-
-####Part 2: Optimize Frames per Second in pizza.html
-
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
-
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
-
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
-
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
-
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+* Made changes to the function changePizzaSizes by taking out the DOM accessing element from the for loop and initialised it to randomPizzaContainer.
+* Removed Dx and instead used switch statements that returns percentage width required according to changes in size sliding bar.
+* Removed the determineDx function as it was not used by any other function.
+* Reduced no of pizza divisions from 100 to 50 and pulled document.getElementById out of the for loop.
+* Created a new function onScroll to call the animation frame using a function onTick such that it only calls once per 10 frames are created and such that re-layout is not done using updatePositions. The onScroll function is called when the scroll event occurs on the page. The onScroll is also used to do one of the calculations that was previously done inside the for loop in updatePositions.
+* Changed style.left to style.transform inorder to increase the speed.
+* Reduced the number of sliding pizzas created in the event DOM content loaded from 200 to 30 as only that many pizzas are displayed on the screen at a time.
+* Reset the elem.style.beginLeft to elem.style.left due to the use of style.transform.
